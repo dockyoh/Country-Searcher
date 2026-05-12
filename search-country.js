@@ -1,6 +1,6 @@
-countryList();
+// countryList();
 
-async function countryList() {
+export async function countryList(input) {
   try {
     const response = await fetch(
       "https://restcountries.com/v3.1/all?fields=name",
@@ -8,14 +8,14 @@ async function countryList() {
 
     const data = await response.json();
 
-    renderListCountry(data);
+    renderListCountry(data, input);
   } catch (error) {
     console.error("Oops! something went wrong", error);
   }
 }
 
-function renderListCountry(data) {
-  const input = "NOR";
+function renderListCountry(data, input) {
+  // const input = "NOR";
   let countries = [];
 
   data.forEach((country) => {
