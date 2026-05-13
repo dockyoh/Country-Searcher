@@ -8,13 +8,13 @@ export async function countryList(input) {
 
     const data = await response.json();
 
-    renderListCountry(data, input);
+    filteredSearchCountries(data, input);
   } catch (error) {
     console.error("Oops! something went wrong", error);
   }
 }
 
-function renderListCountry(data, input) {
+function filteredSearchCountries(data, input) {
   // const input = "NOR";
   let countries = [];
 
@@ -28,7 +28,21 @@ function renderListCountry(data, input) {
 
   filteredCountries.map((resultCountry) => {
     console.log(resultCountry);
+    renderCountries(resultCountry);
   });
 
   console.log(filteredCountries.length);
+}
+
+function renderCountries(resultCountry) {
+  const listContainerEl = document.querySelector(".list-container");
+
+  const liEl = document.createElement("li");
+  const pEl = document.createElement("p");
+
+  liEl.classList.add("list-name");
+  pEl.textContent = resultCountry;
+
+  liEl.appendChild(pEl);
+  listContainerEl.appendChild(liEl);
 }
