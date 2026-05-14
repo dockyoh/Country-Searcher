@@ -1,5 +1,7 @@
 // countryList();
 
+const listContainerEl = document.querySelector(".list-container");
+
 export async function countryList(input) {
   try {
     const response = await fetch(
@@ -15,27 +17,31 @@ export async function countryList(input) {
 }
 
 function filteredSearchCountries(data, input) {
-  // const input = "NOR";
-  let countries = [];
+  if (input !== "") {
+    listContainerEl.innerHTML = "";
+    let countries = [];
 
-  data.forEach((country) => {
-    countries.push(country.name.common);
-  });
+    data.forEach((country) => {
+      countries.push(country.name.common);
+    });
 
-  const filteredCountries = countries.filter((country) => {
-    return country.toLowerCase().includes(input.toLowerCase());
-  });
+    const filteredCountries = countries.filter((country) => {
+      return country.toLowerCase().includes(input.toLowerCase());
+    });
 
-  filteredCountries.map((resultCountry) => {
-    console.log(resultCountry);
-    renderCountries(resultCountry);
-  });
+    filteredCountries.map((resultCountry) => {
+      // console.log(resultCountry);
+      renderCountries(resultCountry);
+    });
 
-  console.log(filteredCountries.length);
+    // console.log(filteredCountries.length);
+  } else {
+    listContainerEl.innerHTML = "";
+  }
 }
 
 function renderCountries(resultCountry) {
-  const listContainerEl = document.querySelector(".list-container");
+  console.log(listContainerEl);
 
   const liEl = document.createElement("li");
   const pEl = document.createElement("p");
